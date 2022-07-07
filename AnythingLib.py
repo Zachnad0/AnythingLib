@@ -64,8 +64,32 @@ class SortingAlgorithms: # Sorting algorithms and crap go here
                     itersXSwapsXCompares[1] += 1
                     inArray[indexBeta] = currNum
                     currNum = inArray[indexAlpha] = testNum
-        
+
         return itersXSwapsXCompares
+    
+    def DisplaceSort(inArray:list):
+        #sorts by counting how many are below it, and then shoving it in a different array at that position
+        betaArray = inArray.copy()
+        itersXSwapsXCompares = [0, 0, 0] #iteration, swap counts and compares
+        for indexAlpha in range(0, len(inArray)):
+            itersXSwapsXCompares[0] += 1
+            currNum = inArray[indexAlpha]
+            lowerValCount = 0
+            for indexBeta in range(0, len(inArray)):
+                testNum = inArray[indexBeta]
+                itersXSwapsXCompares[2] += 1
+                if currNum > testNum:
+                    lowerValCount += 1
+            #insert into array
+            # print("LVC: ", lowerValCount) #debug
+            betaArray[lowerValCount] = currNum
+            itersXSwapsXCompares[1] += 1
+        # print("BR: ", betaArray.copy()) #debug
+        
+
+        return itersXSwapsXCompares, betaArray
+
+
 
 class CustomMath: # Put math related crap down here
     def CubicEquation(x: int,a: float,b: float,c: float, d: float):
